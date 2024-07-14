@@ -133,52 +133,61 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
 
-            <Typography
+            <Typography 
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Data
+              Profile
             </Typography>
             <Item
               title="User Details"
-              to="/team"
+              to="/personal"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Education Detail"
-              to="/contacts"
+              to="/education"
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Skills"
-              to="/invoices"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+  
 
             <Typography
               variant="h6"
               color={colors.grey[300]}
               sx={{ m: "15px 0 5px 20px" }}
             >
-              Pages
+            Office
             </Typography>
             <Item
+            title="Skills"
+            to="/skills"
+            icon={<ReceiptOutlinedIcon />}
+            selected={selected}
+            setSelected={setSelected}
+          />
+            <Item
               title="Portfolio"
-              to="/form"
+              to="/employee"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+            <Typography
+            variant="h6"
+            color={colors.grey[300]}
+            sx={{ m: "15px 0 5px 20px" }}
+          >
+
+          Reviews
+          </Typography>
             <Item
               title="Review"
-              to="/calendar"
+              to="/reviews"
               icon={<CalendarTodayOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

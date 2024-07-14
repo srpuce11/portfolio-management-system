@@ -6,6 +6,11 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import { ColorModeContext, useMode } from "./theme";
+import Form from "../components/form";
+import PersonalDetail from "../pages/personalDetail";
+import EducationDetails from "../pages/educationDetails";
+import EmploymentDetails from "../pages/employeeDetail";
+import FormContainer from "../components/form/formContainer";
 
 const RouterModule = () => {
   const [theme, colorMode] = useMode();
@@ -19,6 +24,11 @@ const RouterModule = () => {
             <Topbar />
             <Routes>
               <Route path="/home" element={<HomePage />} />
+              <Route path="/personal" element={<PersonalDetail />} />
+              <Route path="/education" element={<EducationDetails />} />
+              <Route path="/skills" element={<PersonalDetail />} />
+              <Route path="/employee" element={<EmploymentDetails />} />
+              <Route path="/reviews" element={<FormContainer />} />
             </Routes>
           </main>
         </div>
