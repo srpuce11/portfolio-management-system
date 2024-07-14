@@ -15,6 +15,12 @@ const employmentDetailsSchema = yup.object().shape({
 });
 
 const EmploymentDetails = ({ onSubmit }) => {
+
+  const handleSubmit = (values) => {
+    localStorage.setItem('employmentDetails', JSON.stringify(values));
+    if (onSubmit) onSubmit(values);
+  };
+
   return (
     <ReusableForm
       fields={employmentDetailsFields}
@@ -24,7 +30,7 @@ const EmploymentDetails = ({ onSubmit }) => {
         years: "",
       }}
       validationSchema={employmentDetailsSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     />
   );
 };

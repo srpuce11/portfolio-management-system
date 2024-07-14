@@ -24,6 +24,12 @@ const personalDetailsSchema = yup.object().shape({
 });
 
 const PersonalDetails = ({ onSubmit }) => {
+
+  const handleSubmit = (values) => {
+    localStorage.setItem('personalDetails', JSON.stringify(values));
+    if (onSubmit) onSubmit(values);
+  };
+
   return (
     <ReusableForm
       fields={personalDetailsFields}
@@ -36,7 +42,7 @@ const PersonalDetails = ({ onSubmit }) => {
         address2: "",
       }}
       validationSchema={personalDetailsSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     />
   );
 };

@@ -3,14 +3,10 @@ import { Box, Button, TextField } from "@mui/material";
 import { Formik } from "formik";
 
 const ReusableForm = ({ fields, initialValues, validationSchema, onSubmit }) => {
-  const handleFormSubmit = (values) => {
-    onSubmit(values);
-  };
-
   return (
     <Box m="20px">
       <Formik
-        onSubmit={handleFormSubmit}
+        onSubmit={onSubmit}
         initialValues={initialValues}
         validationSchema={validationSchema}
       >

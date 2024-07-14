@@ -4,31 +4,27 @@ import EducationDetails from "../../pages/educationDetails";
 import EmploymentDetails from "../../pages/employeeDetail";
 
 const FormContainer = () => {
-  const [userId] = useState(new Date().getTime());
-  const [personalDetails, setPersonalDetails] = useState(null);
-  const [educationDetails, setEducationDetails] = useState(null);
-  const [employmentDetails, setEmploymentDetails] = useState(null);
-
-  const handleFormSubmit = (details, setDetails) => (values) => {
-    setDetails(values);
-  };
+  const [userId] = useState(new Date().getTime().toString());
+  const [personalDetails, setPersonalDetails] = useState(JSON.parse(localStorage.getItem('personalDetails')) || {});
+  const [educationDetails, setEducationDetails] = useState(JSON.parse(localStorage.getItem('educationDetails')) || {});
+  const [employmentDetails, setEmploymentDetails] = useState(JSON.parse(localStorage.getItem('employmentDetails')) || {});
 
   const handleFinalSubmit = () => {
     const userDetails = {
       userId,
-      ...personalDetails,
-      ...educationDetails,
-      ...employmentDetails,
+      personalDetails,
+      educationDetails,
+      employmentDetails,
     };
-    localStorage.setItem(userId, JSON.stringify(userDetails));
-    console.log(`Data saved for user ID: ${userId}`, userDetails);
+    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+    console.log("All data saved", userDetails);
   };
 
   return (
     <div>
-      <PersonalDetails onSubmit={handleFormSubmit(personalDetails, setPersonalDetails)} />
-      <EducationDetails onSubmit={handleFormSubmit(educationDetails, setEducationDetails)} />
-      <EmploymentDetails onSubmit={handleFormSubmit(employmentDetails, setEmploymentDetails)} />
+      <PersonalDetails onSubmit={setPersonalDetails} />
+      <EducationDetails onSubmit={setEducationDetails} />
+      <EmploymentDetails onSubmit={setEmploymentDetails} />
       <button onClick={handleFinalSubmit}>Save All Details</button>
     </div>
   );

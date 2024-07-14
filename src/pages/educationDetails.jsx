@@ -15,6 +15,12 @@ const educationDetailsSchema = yup.object().shape({
 });
 
 const EducationDetails = ({ onSubmit }) => {
+
+  const handleSubmit = (values) => {
+    localStorage.setItem('educationDetails', JSON.stringify(values));
+    if (onSubmit) onSubmit(values);
+  };
+
   return (
     <ReusableForm
       fields={educationDetailsFields}
@@ -24,7 +30,7 @@ const EducationDetails = ({ onSubmit }) => {
         graduationYear: "",
       }}
       validationSchema={educationDetailsSchema}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
     />
   );
 };
