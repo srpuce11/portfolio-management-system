@@ -1,6 +1,7 @@
 import React from "react";
 import ReusableForm from "../components/form/index";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const phoneRegExp =
   /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
@@ -24,10 +25,13 @@ const personalDetailsSchema = yup.object().shape({
 });
 
 const PersonalDetails = ({ onSubmit }) => {
+  const navigate = useNavigate();
 
   const handleSubmit = (values) => {
     localStorage.setItem('personalDetails', JSON.stringify(values));
     if (onSubmit) onSubmit(values);
+    // alert('Form submitted successfully!');
+    navigate('/education');
   };
 
   return (

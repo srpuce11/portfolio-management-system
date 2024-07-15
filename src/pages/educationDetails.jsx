@@ -1,6 +1,7 @@
 import React from "react";
 import ReusableForm from "../components/form/index";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 const educationDetailsFields = [
   { name: "degree", label: "Degree", type: "text", gridColumn: "span 4" },
@@ -16,9 +17,13 @@ const educationDetailsSchema = yup.object().shape({
 
 const EducationDetails = ({ onSubmit }) => {
 
+  const navigate = useNavigate();
+
   const handleSubmit = (values) => {
     localStorage.setItem('educationDetails', JSON.stringify(values));
     if (onSubmit) onSubmit(values);
+    alert('Form submitted successfully!');
+    navigate('/employee');
   };
 
   return (

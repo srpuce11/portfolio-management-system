@@ -16,7 +16,18 @@ const FormContainer = () => {
       educationDetails,
       employmentDetails,
     };
-    localStorage.setItem('userDetails', JSON.stringify(userDetails));
+
+
+    const storedUserDetails = JSON.parse(localStorage.getItem('userDetails')) || [];
+
+
+    localStorage.removeItem('personalDetails');
+    localStorage.removeItem('educationDetails');
+    localStorage.removeItem('employmentDetails');
+
+
+    storedUserDetails.push(userDetails);
+    localStorage.setItem('userDetails', JSON.stringify(storedUserDetails));
     console.log("All data saved", userDetails);
   };
 
