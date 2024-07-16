@@ -1,4 +1,9 @@
 .css-1fqm6np-MuiPaper-root-MuiAccordion-root {
-    background-color: #ba6f6f !important
+    background-color: #448e97 !important
 
+}
+
+.css-gpwtyt-MuiPaper-root {
+    background-color: #7dc4ca !important;
+    color: hsl(0, 25%, 2%) !important;
 }

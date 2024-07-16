@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const educationDetailsFields = [
   { name: "degree", label: "Degree", type: "text", gridColumn: "span 4" },
   { name: "university", label: "University", type: "text", gridColumn: "span 4" },
-  { name: "graduationYear", label: "Graduation Year", type: "text", gridColumn: "span 4" },
+  { name: "graduationYear", label: "Graduation Year", type: "number ", gridColumn: "span 4" },
 ];
 
 const educationDetailsSchema = yup.object().shape({

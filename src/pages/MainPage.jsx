@@ -1,8 +1,9 @@
-import React from "react";
+import React, {useRef, useState}from "react";
 import { tokens } from "../Routes/theme";
 import { Box, useTheme } from "@mui/material";
 import { useParams } from "react-router-dom";
 import "./mainPage.css";
+import { useScreenshot } from 'use-react-screenshot'
 import {
   Container,
   Typography,
@@ -36,6 +37,15 @@ const MainPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
+  const ref = useRef(null)
+  const [image, takeScreenshot] = useScreenshot();
+  const [screenshotUrl, setScreenshotUrl] = useState(null);
+
+  const getImage = async () => {
+    const result = await takeScreenshot(ref.current);
+    setScreenshotUrl(result);
+  };
+
   const { firstName } = useParams();
   console.log("firstName from url:>>>", firstName, "<<<<");
   const userDetails = JSON.parse(localStorage.getItem("userDetails"));
@@ -55,7 +65,15 @@ const MainPage = () => {
     return <Typography variant="h5">User not found</Typography>;
   }
 
+  const myStyle={  
+    width:'100%', 
+    height:'100%', 
+    }; 
   return (
+
+    
+    <>
+    <div ref={ref}>
     <Container
       component={motion.div}
       initial={{ opacity: 0 }}
@@ -112,8 +130,26 @@ const MainPage = () => {
             <Typography>Years: {user.employmentDetails.years}</Typography>
           </StyledPaper>
         </AccordionDetails>
+        
       </Accordion>
+   
+    
     </Container>
+    </div>
+    <div>
+    <button style={{ marginBottom: '10px' }} onClick={getImage}>
+      Take screenshot
+    </button>
+    {screenshotUrl && (
+      <div>
+        <a href={screenshotUrl} target="_blank" rel="noopener noreferrer">
+          Open Screenshot
+        </a>
+      </div>
+    )}
+  </div>
+
+  </>
   );
 };
 

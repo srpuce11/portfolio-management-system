@@ -16,13 +16,13 @@ import MainPage from "../pages/MainPage";
 
 const AppLayout = ({ children }) => {
   const location = useLocation();
-  const hideSidebarAndTopbar = location.pathname.startsWith("/main/");
+  const hideSidebar = location.pathname.startsWith("/main/");
 
   return (
     <div className="app">
-      {!hideSidebarAndTopbar && <Sidebar />}
+      {!hideSidebar && <Sidebar />}
       <main className="content">
-        {!hideSidebarAndTopbar && <Topbar />}
+        <Topbar />
         {children}
       </main>
     </div>

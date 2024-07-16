@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 const employmentDetailsFields = [
   { name: "company", label: "Company", type: "text", gridColumn: "span 4" },
   { name: "position", label: "Position", type: "text", gridColumn: "span 4" },
-  { name: "years", label: "Years", type: "text", gridColumn: "span 4" },
+  { name: "years", label: "Years", type: "number", gridColumn: "span 4" },
 ];
 
 const employmentDetailsSchema = yup.object().shape({
-  company: yup.string().required("required"),
-  position: yup.string().required("required"),
-  years: yup.string().required("required"),
+  company: yup.string().required('Company name is required'),
+  position: yup.string().required('Position is required'),
+  years: yup.string().required('Years of experience is required'),
 });
 
 const EmploymentDetails = ({ onSubmit }) => {
