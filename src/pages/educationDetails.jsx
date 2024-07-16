@@ -16,9 +16,7 @@ const educationDetailsSchema = yup.object().shape({
 });
 
 const EducationDetails = ({ onSubmit }) => {
-
   const navigate = useNavigate();
-
   const handleSubmit = (values) => {
     localStorage.setItem('educationDetails', JSON.stringify(values));
     if (onSubmit) onSubmit(values);
@@ -36,7 +34,6 @@ const EducationDetails = ({ onSubmit }) => {
         graduationYear: "",
       };
       };
-
 
   return (
     <ReusableForm
