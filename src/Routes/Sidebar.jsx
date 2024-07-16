@@ -164,13 +164,6 @@ const Sidebar = () => {
             Office
             </Typography>
             <Item
-            title="Skills"
-            to="/skills"
-            icon={<ReceiptOutlinedIcon />}
-            selected={selected}
-            setSelected={setSelected}
-          />
-            <Item
               title="Employment"
               to="/employee"
               icon={<PersonOutlinedIcon />}

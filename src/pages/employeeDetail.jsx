@@ -25,14 +25,21 @@ const EmploymentDetails = ({ onSubmit }) => {
     navigate("/reviews")
   };
 
-  return (
-    <ReusableForm
-      fields={employmentDetailsFields}
-      initialValues={{
+  const getInitialValues = () => {
+    const savedValues = localStorage.getItem('employmentDetails');
+    return savedValues
+      ? JSON.parse(savedValues)
+      : {
         company: "",
         position: "",
         years: "",
-      }}
+      };
+      };
+
+  return (
+    <ReusableForm
+      fields={employmentDetailsFields}
+      initialValues={getInitialValues()}
       validationSchema={employmentDetailsSchema}
       onSubmit={handleSubmit}
     />

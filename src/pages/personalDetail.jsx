@@ -33,18 +33,24 @@ const PersonalDetails = ({ onSubmit }) => {
     // alert('Form submitted successfully!');
     navigate('/education');
   };
+  const getInitialValues = () => {
+    const savedValues = localStorage.getItem('personalDetails');
+    return savedValues
+      ? JSON.parse(savedValues)
+      : {
+          firstName: "",
+          lastName: "",
+          email: "",
+          contact: "",
+          address1: "",
+          address2: "",
+        };
+      };
 
   return (
     <ReusableForm
       fields={personalDetailsFields}
-      initialValues={{
-        firstName: "",
-        lastName: "",
-        email: "",
-        contact: "",
-        address1: "",
-        address2: "",
-      }}
+      initialValues={getInitialValues()}
       validationSchema={personalDetailsSchema}
       onSubmit={handleSubmit}
     />

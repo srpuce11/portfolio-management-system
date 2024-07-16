@@ -5,9 +5,15 @@ import EmploymentDetails from "../../pages/employeeDetail";
 
 const FormContainer = () => {
   const [userId] = useState(new Date().getTime().toString());
-  const [personalDetails, setPersonalDetails] = useState(JSON.parse(localStorage.getItem('personalDetails')) || {});
-  const [educationDetails, setEducationDetails] = useState(JSON.parse(localStorage.getItem('educationDetails')) || {});
-  const [employmentDetails, setEmploymentDetails] = useState(JSON.parse(localStorage.getItem('employmentDetails')) || {});
+  const [personalDetails, setPersonalDetails] = useState(
+    JSON.parse(localStorage.getItem("personalDetails")) || {}
+  );
+  const [educationDetails, setEducationDetails] = useState(
+    JSON.parse(localStorage.getItem("educationDetails")) || {}
+  );
+  const [employmentDetails, setEmploymentDetails] = useState(
+    JSON.parse(localStorage.getItem("employmentDetails")) || {}
+  );
 
   const handleFinalSubmit = () => {
     const userDetails = {
@@ -16,19 +22,15 @@ const FormContainer = () => {
       educationDetails,
       employmentDetails,
     };
-
-
-    const storedUserDetails = JSON.parse(localStorage.getItem('userDetails')) || [];
-
-
-    localStorage.removeItem('personalDetails');
-    localStorage.removeItem('educationDetails');
-    localStorage.removeItem('employmentDetails');
-
+    const storedUserDetails =
+      JSON.parse(localStorage.getItem("userDetails")) || [];
+    localStorage.removeItem("personalDetails");
+    localStorage.removeItem("educationDetails");
+    localStorage.removeItem("employmentDetails");
 
     storedUserDetails.push(userDetails);
-    localStorage.setItem('userDetails', JSON.stringify(storedUserDetails));
-    console.log("All data saved", userDetails);
+    localStorage.setItem("userDetails", JSON.stringify(storedUserDetails));
+    alert("All data saved", userDetails);
   };
 
   return (

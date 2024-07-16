@@ -26,14 +26,22 @@ const EducationDetails = ({ onSubmit }) => {
     navigate('/employee');
   };
 
-  return (
-    <ReusableForm
-      fields={educationDetailsFields}
-      initialValues={{
+  const getInitialValues = () => {
+    const savedValues = localStorage.getItem('educationDetails');
+    return savedValues
+      ? JSON.parse(savedValues)
+      : {
         degree: "",
         university: "",
         graduationYear: "",
-      }}
+      };
+      };
+
+
+  return (
+    <ReusableForm
+      fields={educationDetailsFields}
+      initialValues={getInitialValues()}
       validationSchema={educationDetailsSchema}
       onSubmit={handleSubmit}
     />
