@@ -24,12 +24,12 @@ const FormContainer = () => {
     };
     const storedUserDetails =
       JSON.parse(localStorage.getItem("userDetails")) || [];
-    localStorage.removeItem("personalDetails");
-    localStorage.removeItem("educationDetails");
-    localStorage.removeItem("employmentDetails");
 
     storedUserDetails.push(userDetails);
     localStorage.setItem("userDetails", JSON.stringify(storedUserDetails));
+    localStorage.removeItem("personalDetails");
+    localStorage.removeItem("educationDetails");
+    localStorage.removeItem("employmentDetails");
     alert("All data saved", userDetails);
   };
 

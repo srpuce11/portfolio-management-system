@@ -1,9 +1,10 @@
-import React, {useRef, useState}from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { tokens } from "../Routes/theme";
 import { Box, useTheme } from "@mui/material";
 import { useParams } from "react-router-dom";
 import "./mainPage.css";
-import { useScreenshot } from 'use-react-screenshot'
+import { useScreenshot } from "use-react-screenshot";
+import { useNavigate } from "react-router-dom";
 import {
   Container,
   Typography,
@@ -36,15 +37,36 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 const MainPage = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
-  const ref = useRef(null)
+  const navigate = useNavigate();
+  const ref = useRef(null);
   const [image, takeScreenshot] = useScreenshot();
   const [screenshotUrl, setScreenshotUrl] = useState(null);
+  const [error, setError] = useState("");
 
   const getImage = async () => {
-    const result = await takeScreenshot(ref.current);
-    setScreenshotUrl(result);
+    try {
+      const result = await takeScreenshot(ref.current);
+      if (result) {
+        setScreenshotUrl(result);
+        console.log("screenshotUrl url:>>>", screenshotUrl, "<<<<");
+        var win = window.open();
+        win.document.write(
+          '<iframe src="' +
+            screenshotUrl +
+            '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:700px;" allowfullscreen></iframe>'
+        );
+      } else {
+        setError("Failed to capture screenshot.");
+      }
+    } catch (error) {
+      setError(error.message);
+    }
   };
+  useEffect(() => {
+
+
+    
+  });
 
   const { firstName } = useParams();
   console.log("firstName from url:>>>", firstName, "<<<<");
@@ -65,91 +87,89 @@ const MainPage = () => {
     return <Typography variant="h5">User not found</Typography>;
   }
 
-  const myStyle={  
-    width:'100%', 
-    height:'100%', 
-    }; 
+  const myStyle = {
+    width: "100%",
+    height: "100%",
+  };
   return (
-
-    
     <>
-    <div ref={ref}>
-    <Container
-      component={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 9 }}
-      transition={{ duration: 0.5 }}
-    >
-      <Typography variant="h4" component="div" gutterBottom>
-        Welcome, Please find portfolio for {user.personalDetails.firstName}{" "}
-        {user.personalDetails.lastName} profile..
-      </Typography>
-      <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography color={colors.greenAccent[500]} variant="h3">
-            Personal Details
+      <div ref={ref}>
+        <Container
+          component={motion.div}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 9 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Typography variant="h4" component="div" gutterBottom>
+            Welcome, Please find portfolio for {user.personalDetails.firstName}{" "}
+            {user.personalDetails.lastName} profile..
           </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <StyledPaper>
-            <Typography>Email: {user.personalDetails.email}</Typography>
-            <Typography>Contact: {user.personalDetails.contact}</Typography>
-            <Typography>Address 1: {user.personalDetails.address1}</Typography>
-            <Typography>Address 2: {user.personalDetails.address2}</Typography>
-          </StyledPaper>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography color={colors.greenAccent[500]} variant="h3">
-            Education Details
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <StyledPaper>
-            <Typography>Degree: {user.educationDetails.degree}</Typography>
-            <Typography>
-              University: {user.educationDetails.university}
-            </Typography>
-            <Typography>
-              Graduation Year: {user.educationDetails.graduationYear}
-            </Typography>
-          </StyledPaper>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion defaultExpanded>
-        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography color={colors.greenAccent[500]} variant="h3">
-            Employment Details
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <StyledPaper>
-            <Typography>Company: {user.employmentDetails.company}</Typography>
-            <Typography>Position: {user.employmentDetails.position}</Typography>
-            <Typography>Years: {user.employmentDetails.years}</Typography>
-          </StyledPaper>
-        </AccordionDetails>
-        
-      </Accordion>
-   
-    
-    </Container>
-    </div>
-    <div>
-    <button style={{ marginBottom: '10px' }} onClick={getImage}>
-      Take screenshot
-    </button>
-    {screenshotUrl && (
-      <div>
-        <a href={screenshotUrl} target="_blank" rel="noopener noreferrer">
-          Open Screenshot
-        </a>
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography color={colors.greenAccent[500]} variant="h3">
+                Personal Details
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <StyledPaper>
+                <Typography>Email: {user.personalDetails.email}</Typography>
+                <Typography>Contact: {user.personalDetails.contact}</Typography>
+                <Typography>
+                  Address 1: {user.personalDetails.address1}
+                </Typography>
+                <Typography>
+                  Address 2: {user.personalDetails.address2}
+                </Typography>
+              </StyledPaper>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography color={colors.greenAccent[500]} variant="h3">
+                Education Details
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <StyledPaper>
+                <Typography>Degree: {user.educationDetails.degree}</Typography>
+                <Typography>
+                  University: {user.educationDetails.university}
+                </Typography>
+                <Typography>
+                  Graduation Year: {user.educationDetails.graduationYear}
+                </Typography>
+              </StyledPaper>
+            </AccordionDetails>
+          </Accordion>
+          <Accordion defaultExpanded>
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography color={colors.greenAccent[500]} variant="h3">
+                Employment Details
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <StyledPaper>
+                <Typography>
+                  Company: {user.employmentDetails.company}
+                </Typography>
+                <Typography>
+                  Position: {user.employmentDetails.position}
+                </Typography>
+                <Typography>Years: {user.employmentDetails.years}</Typography>
+              </StyledPaper>
+            </AccordionDetails>
+          </Accordion>
+        </Container>
       </div>
-    )}
-  </div>
-
-  </>
+      <div>
+        <button
+          style={{ marginBottom: "10px", marginTop: "10px" }}
+          onClick={getImage}
+        >
+          Take screenshot
+        </button>
+      </div>
+    </>
   );
 };
 
